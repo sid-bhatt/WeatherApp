@@ -18,41 +18,30 @@ function App() {
     setidButtonClicked(city)
     setFlag(true)
   }
-  // const getWeather = (e) => {
-  //   if(e.key === 'enter'){
-  //     axios
-  //     .get(`api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
-  //     .then(res => {
-  //       console.log('button clicked =>', res);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  //   }
-  // }
-  let emoji = null;
+  
+  // let emoji = null;
   const getEmoji = () => {
     if(typeof weatherData.main !== 'undefined'){
       if(weatherData.weather[0].main === 'Clouds'){
-        return emoji = 'fa fa-cloud fa-4x'
+        return 'fa fa-cloud fa-4x'
       }
       else if(weatherData.weather[0].main === 'Thunderstorm'){
-        return emoji = 'fa-bolt fa-4x'
+        return 'fa fa-bolt fa-4x'
       }
       else if(weatherData.weather[0].main === 'Drizzle'){
-        return emoji = 'fa-cloud-rain fa-4x'
+        return 'fa fa-cloud-rain fa-4x'
       }
       else if(weatherData.weather[0].main === 'Rain'){
-        return emoji = 'fa-clou-shower-heavy fa-4x'
+        return 'fa fa-clou-shower-heavy fa-4x'
       }
       else if(weatherData.weather[0].main === 'Snow'){
-        return emoji = 'fa-snow-flake fa-4x'
+        return 'fa fa-snow-flake fa-4x'
       }
       else if(weatherData.weather[0].main === 'Sunny' || weatherData.weather[0].main === 'Clear'){
-        return emoji = 'fa fa-sun fa-4x'
+        return 'fa fa-sun fa-4x'
       }
       else{
-        return emoji = 'fa fa-smog fa-4x'
+        return 'fa fa-smog fa-4x'
       }
     }
   }
@@ -75,6 +64,7 @@ function App() {
         getEmoji()
       }
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flag, idButtonClicked])
 
   // let minTemperature = Math.round(weatherData.main.temp_min - 273.15);
