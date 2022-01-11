@@ -30,6 +30,33 @@ function App() {
   //     })
   //   }
   // }
+  let emoji = null;
+  const getEmoji = () => {
+    if(typeof weatherData.main !== 'undefined'){
+      if(weatherData.weather[0].main === 'Clouds'){
+        return emoji = 'fa fa-cloud fa-4x'
+      }
+      else if(weatherData.weather[0].main === 'Thunderstorm'){
+        return emoji = 'fa-bolt fa-4x'
+      }
+      else if(weatherData.weather[0].main === 'Drizzle'){
+        return emoji = 'fa-cloud-rain fa-4x'
+      }
+      else if(weatherData.weather[0].main === 'Rain'){
+        return emoji = 'fa-clou-shower-heavy fa-4x'
+      }
+      else if(weatherData.weather[0].main === 'Snow'){
+        return emoji = 'fa-snow-flake fa-4x'
+      }
+      else if(weatherData.weather[0].main === 'Sunny' || weatherData.weather[0].main === 'Clear'){
+        return emoji = 'fa fa-sun fa-4x'
+      }
+      else{
+        return emoji = 'fa fa-smog fa-4x'
+      }
+    }
+  }
+  
 
   useEffect(() => {
     const getWeather = () => axios
@@ -43,13 +70,14 @@ function App() {
         alert('City not found!!')
         console.log(err);
       })
-
-      
       if(flag === true){
         getWeather()
+        getEmoji()
       }
     
   }, [flag, idButtonClicked])
+
+  // let minTemperature = Math.round(weatherData.main.temp_min - 273.15);
 
   return (
     <div className="container">
@@ -62,9 +90,11 @@ function App() {
         <div className='weather-data'>
           <p className='city'>{weatherData.name}, {weatherData.sys.country}</p>
           <p className='temp'>
-            {Math.round(weatherData.main.temp-273.15)}<span>&#176;C</span>
+            {Math.round(weatherData.main.temp-273.15)}&deg;C
           </p>
+          <p className={getEmoji()}></p>
           <p className='weather'>{weatherData.weather[0].main}</p>
+          <p className='weather'>{Math.round(weatherData.main.temp_min - 273.15)}&deg;C | {Math.round(weatherData.main.temp_max - 273.15)}&deg;C</p>
         </div>
         ): (
         <div>
